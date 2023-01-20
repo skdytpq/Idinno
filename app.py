@@ -8,10 +8,10 @@ def home():
 @app.route('/create', methods=['POST','GET'])
 def create():
     if (request.method =='GET'):
-	return 'IDINNO_YOLO_Project'
+        return 'IDINNO_YOLO_Project'
     else (request.method == 'POST'):
          params = request.get_json()
-    	return 'ok'
+        return 'ok'
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True)
