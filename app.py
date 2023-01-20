@@ -5,7 +5,7 @@ app = Flask(__name__)
 def home():
    return 'This is joseph'
    
-@user_bp.route('/create', methods=['POST'])
+@app.route('/create', methods=['POST'])
 def create():
     params = request.get_json()
     return 'ok'
