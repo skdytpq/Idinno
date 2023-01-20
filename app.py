@@ -16,7 +16,8 @@ def create():
          start = time.time()
          params = request.get_json()
          img_url = params['imgUrl']
-         os.system("curl " + url + " > test.jpg")
+         os.system("curl " + img_url + " > test.jpg")
+         print(params)
          return 'ok'
     else:
          return 'NONE'
