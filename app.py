@@ -5,9 +5,12 @@ app = Flask(__name__)
 def home():
    return 'This is joseph'
    
-@app.route('/create', methods=['POST'])
+@app.route('/create', methods=['POST','GET'])
 def create():
-    params = request.get_json()
+    if(request.method =='GET'):
+		return 'IDINNO_YOLO_Project'
+    else:
+         params = request.get_json()
     return 'ok'
 
 if __name__ == '__main__':
