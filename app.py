@@ -1,4 +1,7 @@
 from flask import Flask, request, jsonify
+import os
+import time
+from PIL import Image
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,7 +13,10 @@ def create():
     if (request.method =='GET'):
          return 'IDINNO_YOLO_Project'
     elif request.method == 'POST':
+         start = time.time()
          params = request.get_json()
+         img_url = params['imgUrl']
+         os.system("curl " + url + " > test.jpg")
          return 'ok'
     else:
          return 'NONE'
