@@ -9,9 +9,11 @@ def home():
 def create():
     if (request.method =='GET'):
         return 'IDINNO_YOLO_Project'
-    else (request.method == 'POST'):
+    elif request.method == 'POST':
          params = request.get_json()
         return 'ok'
+   else:
+        return 'NONE'
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True)
