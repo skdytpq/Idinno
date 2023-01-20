@@ -12,7 +12,7 @@ def create():
     elif request.method == 'POST':
          params = request.get_json()
         return 'ok'
-   else:
+    else:
         return 'NONE'
 
 if __name__ == '__main__':
