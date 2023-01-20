@@ -7,9 +7,9 @@ def home():
    
 @app.route('/create', methods=['POST','GET'])
 def create():
-    if(request.method =='GET'):
+    if (request.method =='GET'):
 		return 'IDINNO_YOLO_Project'
-    else:
+    else (request.method == 'POST'):
          params = request.get_json()
     return 'ok'
 
