@@ -6,27 +6,26 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-   return 'This is joseph'
+   return 'This is Idinnolab'
    
 @app.route('/create', methods=['POST','GET'])
 def create():
     if (request.method =='GET'):
          return 'IDINNO_YOLO_Project'
     elif request.method == 'POST':
-         start = time.time()
          params = request.get_json()
-         img_id = params['imgUrl']
-         os.system("curl " + img_url + " > test.jpg")
-         print(params)
-         if img_id == '제품중심_사진':
-            return '제품중심 사진'
-         elif img_id == '제품포함_사진':
-            return '제품포함 사진'
-         elif img_id == '2D_디자인':
-             return '2D_디자인'
-         elif img_id == '라인중심_스케치':
-            return '라인 스케치'
-         return 'ok'
+         img_id = params['img_id']
+         #os.system("curl " + img_url + " > test.jpg")
+         if img_id == 'C01':
+            return 'p_of_sa_m_10_0001 '
+         elif img_id == 'C02':
+            return 'p_of_sa_w_10_0001'
+         elif img_id == 'C03':
+             return 'p_of_sa_w_30_0001'
+         elif img_id == 'C04':
+            return 'p_of_sa_w_30_0002'
+         else: 
+            return 'p_of_sa_w_30_0002'
     else:
          return 'NONE'
 
