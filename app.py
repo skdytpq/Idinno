@@ -14,7 +14,7 @@ def create():
          return 'IDINNO_YOLO_Project'
     elif request.method == 'POST':
          params = request.get_json()
-         img_id = params['img_id']
+         img_id = params['pInfo'][0]['img_id']
          #os.system("curl " + img_url + " > test.jpg")
          if img_id == 'C01':
             return 'p_of_sa_m_10_0001 '
