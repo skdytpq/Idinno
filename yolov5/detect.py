@@ -216,7 +216,8 @@ def run(
     if update:
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
     print('여기부터',rr,' : rr결과')
-    return rr
+    print(type(rr))
+    return str(rr)
 
 def parse_opt():
     parser = argparse.ArgumentParser()
