@@ -885,7 +885,7 @@ def non_max_suppression(
         iou_thres=0.45,
         classes=None,
         agnostic=False,
-        multi_label=False,
+        multi_label=True,
         labels=(),
         max_det=300,
         nm=0,  # number of masks
