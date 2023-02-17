@@ -90,8 +90,8 @@ def run(
         source = check_file(source)  # download
     rr = []
     # Directories
-    save_dir = '../labels'#increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
-    #(save_dir / '../labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
+    save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
+    (save_dir / '../labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
     # Load model
     device = select_device(device)
