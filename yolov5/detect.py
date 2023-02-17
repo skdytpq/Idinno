@@ -250,10 +250,11 @@ def parse_opt():
     print_args(vars(opt))
     return opt
 
-
-def main1(opt,source1):
+opt = parse_opt()
+print(opt)
+def main1(opt):
     check_requirements(exclude=('tensorboard', 'thop'))
-    run(**vars(opt),source = source1)
+    run(**vars(opt))
 
 
 if __name__ == "__main__":
