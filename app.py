@@ -47,8 +47,8 @@ def home():
 def create():
     if (request.method =='GET'):
          opt = parse_opt('https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
-         r = main1(opt)
-         return f'{",".join(r)}'
+         rr = main1(opt)
+         return f'{rr}'
     elif request.method == 'POST':
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
