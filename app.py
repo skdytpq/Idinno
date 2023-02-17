@@ -19,7 +19,7 @@ def create():
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
          #os.system("curl " + img_url + " > test.jpg")
-         rr = main(source = img_id)
+         rr = main1(source = img_id)
          for i in range(len(rr)):
             return i
 

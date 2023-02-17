@@ -251,9 +251,9 @@ def parse_opt():
     return opt
 
 
-def main1(opt):
+def main1(opt,source1):
     check_requirements(exclude=('tensorboard', 'thop'))
-    run(**vars(opt))
+    run(**vars(opt),source = source1)
 
 
 if __name__ == "__main__":
