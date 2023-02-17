@@ -185,6 +185,7 @@ def run(
                 cv2.waitKey(1)  # 1 millisecond
 
             # Save results (image with detections)
+            save_img = 0
             if save_img:
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
@@ -216,6 +217,7 @@ def run(
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
     print(s, '결과')
     print(det , '결과 2')
+    print(rr)
     return det
 
 def parse_opt():
