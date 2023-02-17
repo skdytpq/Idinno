@@ -13,7 +13,7 @@ def home():
 def create():
     if (request.method =='GET'):
          r = main(source = 'https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
-         return 'IDINNO_YOLO_Project'
+         return 'IDINNO_YOLO_Project',r
     elif request.method == 'POST':
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
