@@ -48,8 +48,7 @@ def create():
     if (request.method =='GET'):
          opt = parse_opt('https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
          r = main1(opt)
-         print(main1)
-         return 'IDINNO_YOLO_Project',r
+         return f'IDINNO_YOLO_Project,{r}'
     elif request.method == 'POST':
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
