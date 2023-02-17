@@ -12,7 +12,7 @@ def home():
 @app.route('/create', methods=['POST','GET'])
 def create():
     if (request.method =='GET'):
-         r = main1(source = 'https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
+         r = main1()
          print(main1)
          return 'IDINNO_YOLO_Project',r
     elif request.method == 'POST':
