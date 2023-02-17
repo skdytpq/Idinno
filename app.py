@@ -53,9 +53,9 @@ def create():
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
          #os.system("curl " + img_url + " > test.jpg")
-         rr = main1(source = img_id)
-         for i in range(len(rr)):
-            return i
+         opt = parse_opt(img_id)
+         r = main1(opt)
+         return f'{r}'
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True)
