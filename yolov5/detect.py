@@ -215,9 +215,7 @@ def run(
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
-    print('여기부터',rr,' : rr결과')
-    print(type(rr))
-    return str(rr)
+    return rr
 
 def parse_opt():
     parser = argparse.ArgumentParser()
@@ -254,11 +252,10 @@ def parse_opt():
     return opt
 
 opt = parse_opt()
-print(opt)
 def main1(opt):
     check_requirements(exclude=('tensorboard', 'thop'))
-    run(**vars(opt))
-
+    rr = run(**vars(opt))
+    return rr
 
 if __name__ == "__main__":
     opt = parse_opt()
