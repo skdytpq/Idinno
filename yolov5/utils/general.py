@@ -881,7 +881,7 @@ def clip_segments(segments, shape):
 
 def non_max_suppression(
         prediction,
-        conf_thres=0.25,
+        conf_thres=0.2,
         iou_thres=0.45,
         classes=None,
         agnostic=False,
@@ -949,7 +949,7 @@ def non_max_suppression(
 
         # Detections matrix nx6 (xyxy, conf, cls)
         if multi_label:
-            i, j = (x[:, 5:mi] > conf_thres).nonzero(as_tuple=False).T
+            i, j = (x[:, 5:mi]*10 > conf_thres).nonzero(as_tuple=False).T
             x = torch.cat((box[i], x[i, 5 + j, None], j[:, None].float(), mask[i]), 1)
         else:  # best class only
             conf, j = x[:, 5:mi].max(1, keepdim=True)
