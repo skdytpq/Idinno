@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import os
 import time
 from PIL import Image
-from yolov5.detect import main  
+from yolov5.detect import main1  
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,7 +12,8 @@ def home():
 @app.route('/create', methods=['POST','GET'])
 def create():
     if (request.method =='GET'):
-         r = main(source = 'https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
+         r = main1(source = 'https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
+         print(main1)
          return 'IDINNO_YOLO_Project',r
     elif request.method == 'POST':
          params = request.get_json()
