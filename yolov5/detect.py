@@ -215,7 +215,7 @@ def run(
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
-
+    print('여기부터',rr,' : rr결과')
     return rr
 
 def parse_opt():
