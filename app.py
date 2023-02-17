@@ -48,14 +48,14 @@ def create():
     if (request.method =='GET'):
          opt = parse_opt('https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
          r = main1(opt)
-         return f'{",".join(r)}'
+         return f'{r}'
     elif request.method == 'POST':
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
          #os.system("curl " + img_url + " > test.jpg")
          opt = parse_opt(img_id)
          r = main1(opt)
-         return f'{r}'
+         return f'{",".join(r)}'
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True)
