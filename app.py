@@ -4,6 +4,8 @@ import time
 from PIL import Image
 from yolov5.detect import main1  
 import argparse
+import pandas as pd
+
 app = Flask(__name__)
 
 def parse_opt(img_id):
@@ -48,14 +50,40 @@ def create():
     if (request.method =='GET'):
          opt = parse_opt('https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg')
          rr = main1(opt)
-         return f'{",".join(rr)}'
+         val = mapping(rr)
+         return f'{",".join(val)}'
     elif request.method == 'POST':
+      try:
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
          #os.system("curl " + img_url + " > test.jpg")
          opt = parse_opt(img_id)
          r = main1(opt)
-         return f'{",".join(r)}'
+         val = mapping(rr)
+         return f'{",".join(val)}'
+      except:
+         return '분석에 실패하였습니다.'
+def mapping(r) :
+   df = pd.read_excel('per.xlsx')
+   val = []
+   for i in range(len(df['class'].values)):
+      val.append(df['class'].values[i].split(':')[1].strip()[1:-1])
+   df['class'] = val
+   df.fillna(0,inplace = True)
+   get = dict()
+   sub_list = []
+   for i in df['class'].values:
+      for j in df.loc[df['class'] == i].values[0][1:]:
+         if j != 0:
+               sub_list.append(j)
+      get[i] = sub_list
+      sub_list = []
+   key_list = []
+   for key in r:
+      key_list.extend(get[key])
+   val = pd.Series(key_list).value_counts().index[0:5]
+   return val
+
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True)
