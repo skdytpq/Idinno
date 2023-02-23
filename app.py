@@ -44,7 +44,7 @@ def parse_opt(img_id):
 @app.route('/')
 def home():
    return 'This is Idinnolab'
-   
+
 @app.route('/create', methods=['POST','GET'])
 def create():
     if (request.method =='GET'):
@@ -52,7 +52,7 @@ def create():
          rr = main1(opt)
          val = mapping(rr)
          return f'{",".join(val)}'
-    elif request.method == 'POST':
+    elif (request.method == 'POST'):
       try:
          params = request.get_json()
          img_id = params['pInfo'][0]['img_id']
@@ -62,7 +62,8 @@ def create():
          val = mapping(r)
          return f'{",".join(val)}'
       except:
-         return '분석에 실패하였습니다.'
+         return 'NaN'
+
 def mapping(r) :
    df = pd.read_excel('per.xlsx')
    val = []
@@ -87,7 +88,5 @@ def mapping(r) :
       val = pd.Series(key_list).value_counts().index[0:-1]
    return val
 
-
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True)
-   
