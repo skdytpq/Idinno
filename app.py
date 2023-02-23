@@ -81,7 +81,10 @@ def mapping(r) :
    key_list = []
    for key in r:
       key_list.extend(get[key])
-   val = pd.Series(key_list).value_counts().index[0:5]
+   try:
+      val = pd.Series(key_list).value_counts().index[0:5]
+   except:
+      val = pd.Series(key_list).value_counts().index[0:-1]
    return val
 
 
