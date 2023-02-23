@@ -59,7 +59,7 @@ def create():
          #os.system("curl " + img_url + " > test.jpg")
          opt = parse_opt(img_id)
          r = main1(opt)
-         val = mapping(rr)
+         val = mapping(r)
          return f'{",".join(val)}'
       except:
          return '분석에 실패하였습니다.'
