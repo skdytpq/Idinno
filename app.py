@@ -55,7 +55,7 @@ def create():
     elif (request.method == 'POST'):
       try:
          params = request.get_json()
-         img_id = params['pInfo'][0]['img_Url']
+         img_id = params["pInfo"][0]["imgUrl"]
          #os.system("curl " + img_url + " > test.jpg")
          opt = parse_opt(img_id)
          r = main1(opt)
