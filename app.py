@@ -142,6 +142,7 @@ def mapping(r,tp) :
       df = pd.read_excel('sheet1.xlsx')
       df = df.rename(columns=df.iloc[0]).iloc[1:,:]
       data  = pd.concat([df1,df],axis = 1)
+      data.fillna(inplace = True)
       score = []
       personas = dict()
       for i in range(data.shape[0]-1):
