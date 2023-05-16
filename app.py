@@ -8,7 +8,6 @@ import pandas as pd
 from person import area_f ,interior_f,tv_conv_f,people_conv_f,furniture_f
 import numpy as np
 app = Flask(__name__)
-import pbd
 
 def parse_opt(img_id,type):
     parser = argparse.ArgumentParser()
@@ -147,6 +146,7 @@ def mapping(r,tp) :
       personas = dict()
       for i in range(data.shape[0]):
          td = data.iloc[i,:]
+         print(td['내향/외향'])
          IE = float(td['내향/외향'])
          SN = float(td['감각/직관'])
          JP = float(td['판단/인식'])
