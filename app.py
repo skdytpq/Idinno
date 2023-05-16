@@ -168,7 +168,7 @@ def mapping(r,tp) :
       #persona = persona.sort_values(ascending = False,by = 'score').iloc[:3].index
       #per = np.argmax(np.array(score))
       #persona =data['persona_no'][per]
-      return res#persona
+       return res#persona
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True,threaded=False)
