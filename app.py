@@ -137,10 +137,10 @@ def mapping(r,tp) :
       tv_conv = n['elec'] # TV 및 편의 요소 배치
       people_conv = n['person'] # 편의 요소 대비 사람의 수
       furniture = n['fur'] # 가구 대비 사람의 수
-      df1 = pd.read_excel('sheet_1.xlsx', sheet_name=2)
+      df1 = pd.read_excel('sheet_1.xlsx')
       df1 = df1.drop_duplicates(subset = ['persona_no'])
       df1 = df1.reset_index()
-      df = pd.read_excel('sheet_2.xlsx', sheet_name=3)
+      df = pd.read_excel('sheet_2.xlsx')
       data  = pd.concat([df1,df],axis = 1)
       score = []
       personas = dict()
