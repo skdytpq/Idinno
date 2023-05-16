@@ -8,22 +8,6 @@ import pandas as pd
 from person import area_f ,interior_f,tv_conv_f,people_conv_f,furniture_f
 import numpy as np
 app = Flask(__name__)
-person = ['person']
-
-elec = ['cell phone', 'laptop', 'mouse', 'remote', 'keyboard',  'hair drier', 'toothbrush']
-
-home = ['tv', 'microwave', 'oven', 'toaster', 'refrigerator', 'sink']
-
-fur = ['chair', 'couch', 'bed', 'dining table', 'toilet']
-
-mot = ['bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat']
-
-inter = ['frisbee', 'kite', 'skis', 'snowboard', 'surfboard', 'tennis racket', 'potted plant', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'baseball bat', 'baseball glove', 'skateboard','sports ball', 'clock', 'vase', 'scissors', 'teddy bear', 'book']
-
-dish = ['bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl']
-
-etc = ['fire hydrant', 'stop sign', 'traffic light', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake']
-
 
 
 def parse_opt(img_id,type):
@@ -93,6 +77,21 @@ def create():
          return 'NaN'  
 
 def mapping(r,tp) :
+   person = ['person']
+
+   elec = ['cell phone', 'laptop', 'mouse', 'remote', 'keyboard',  'hair drier', 'toothbrush']
+
+   fur = ['chair', 'couch', 'bed', 'dining table', 'toilet']
+
+   mot = ['bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat']
+
+   inter = ['frisbee', 'kite', 'skis', 'snowboard', 'surfboard', 'tennis racket', 'potted plant', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'baseball bat', 'baseball glove', 'skateboard','sports ball', 'clock', 'vase', 'scissors', 'teddy bear', 'book']
+
+   dish = ['bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl']
+
+   etc = ['fire hydrant', 'stop sign', 'traffic light', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake']
+
+
    if tp == 'F':
       df = pd.read_excel('per.xlsx')
       val = []
