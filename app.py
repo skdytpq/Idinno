@@ -159,13 +159,16 @@ def mapping(r,tp) :
          people_conv_score = people_conv_f(IE, Easy, people_conv)
          furniture_score = furniture_f(IE, Age, furniture)
          total_score = area_score + interior_score + tv_conv_score + people_conv_score + furniture_score
-         personas[td['persona_no']] = total_score
-      persona = pd.DataFrame(personas)
-      persona = persona.rename(columns = {0 : 'score'})
-      persona = persona.sort_values(ascending = False,by = 'score').iloc[:3].index
+         score.append(total_score)
+       a = np.argmax(np.array(score))
+       personas[td['persona_no']] = total_score
+       res = data.iloc[a,:]['persona_no']
+      #persona = pd.DataFrame(personas)
+      #persona = persona.rename(columns = {0 : 'score'})
+      #persona = persona.sort_values(ascending = False,by = 'score').iloc[:3].index
       #per = np.argmax(np.array(score))
       #persona =data['persona_no'][per]
-      return persona
+      return res#persona
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True,threaded=False)
