@@ -152,6 +152,7 @@ def mapping(r,tp) :
          Trend = float(td['트랜드\n민감도'])
          Quality = float(td['상품/서비스품질'])
          Easy = float(td['이용편의성'][1])
+         print(td['age_gender'],'!!!!!!!!!!!!!!!!')
          Age = float(td['age_gender'][:2])
          area_score = area_f(SN, JP, area)
          interior_score = interior_f(Trend, Easy, interior)
