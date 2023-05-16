@@ -147,7 +147,6 @@ def mapping(r,tp) :
       personas = dict()
       for i in range(data.shape[0]):
          td = data.iloc[i,:]
-         pdb.set_trace()
          IE = float(td['내향/외향'])
          SN = float(td['감각/직관'])
          JP = float(td['판단/인식'])
