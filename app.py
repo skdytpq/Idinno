@@ -53,10 +53,10 @@ def home():
 @app.route('/create', methods=['POST','GET'])
 def create():
     if (request.method =='GET'):
-         opt = parse_opt('https://ethno-mining.com/resources/persona/curation/230201/2302011128.jpg','H')
+         opt = parse_opt('sample.jpeg','H')
          rr = main1(opt)
          val = mapping(rr,'H')
-         return f'{",".join(val)}'
+         return val#f'{",".join(val)}'
     elif (request.method == 'POST'):  
       try:
          params = request.get_json()
@@ -66,12 +66,12 @@ def create():
              opt = parse_opt(img_id,'H')
              r = main1(opt)
              val = mapping(r,'H')
-             return val
+             return f'{",".join(val)}'
          else:
              opt = parse_opt(img_id,'F')
              r = main1(opt)
              val = mapping(r,'F')
-             return f'{",".join(val)}'
+             return val#f'{",".join(val)}'
       except:
          return 'NaN'  
 
