@@ -5,12 +5,17 @@ from PIL import Image
 from yolov5.detect import main1  
 import argparse
 import pandas as pd
-
+from person import area_f ,interior_f,tv_conv_f,people_conv_f,furniture_f
+import numpy as np
 app = Flask(__name__)
 
-def parse_opt(img_id):
+def parse_opt(img_id,type):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default= 'yolov5/best.pt', help='model path or triton URL')
+    if type == 'F':
+      df = 'yolov5/best.pt'
+    else: 
+      df = 'yolov5/yolov5s_.pt'
+    parser.add_argument('--weights', nargs='+', type=str, default= df, help='model path or triton URL')
     parser.add_argument('--source', type=str, default=img_id, help='file/dir/URL/glob/screen/0(webcam)')
     parser.add_argument('--data', type=str, default='data/coco128.yaml', help='(optional) dataset.yaml path')
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640], help='inference size h,w')
@@ -57,39 +62,74 @@ def create():
          params = request.get_json()
          img_id = params["pInfo"][0]["imgUrl"]
          #os.system("curl " + img_url + " > test.jpg")
-         if params['pInfo'][0]['img_info'] == 'F':
-             pass
-         else:
-             opt = parse_opt(img_id)
+         if params['pInfo'][0]['img_info'] == 'H':
+             opt = parse_opt(img_id,'H')
              r = main1(opt)
-             val = mapping(r)
+             val = mapping(r,'H')
+             return val
+         else:
+             opt = parse_opt(img_id,'F')
+             r = main1(opt)
+             val = mapping(r,'F')
              return f'{",".join(val)}'
       except:
          return 'NaN'
 
-def mapping(r) :
-   df = pd.read_excel('per.xlsx')
-   val = []
-   for i in range(len(df['class'].values)):
-      val.append(df['class'].values[i].split(':')[1].strip()[1:-1])
-   df['class'] = val
-   df.fillna(0,inplace = True)
-   get = dict()
-   sub_list = []
-   for i in df['class'].values:
-      for j in df.loc[df['class'] == i].values[0][1:]:
-         if j != 0:
-               sub_list.append(j)
-      get[i] = sub_list
+def mapping(r,tp) :
+   if tp == 'F':
+      df = pd.read_excel('per.xlsx')
+      val = []
+      for i in range(len(df['class'].values)):
+         val.append(df['class'].values[i].split(':')[1].strip()[1:-1])
+      df['class'] = val
+      df.fillna(0,inplace = True)
+      get = dict()
       sub_list = []
-   key_list = []
-   for key in r:
-      key_list.extend(get[key])
-   try:
-      val = pd.Series(key_list).value_counts().index[0:5]
-   except:
-      val = pd.Series(key_list).value_counts().index[0:-1]
-   return val
+      for i in df['class'].values:
+         for j in df.loc[df['class'] == i].values[0][1:]:
+            if j != 0:
+                  sub_list.append(j)
+         get[i] = sub_list
+         sub_list = []
+      key_list = []
+      for key in r:
+         key_list.extend(get[key])
+      try:
+         val = pd.Series(key_list).value_counts().index[0:5]
+      except:
+         val = pd.Series(key_list).value_counts().index[0:-1]
+      return val
+   else :
+      area = 20 # 면적 당 가구 배치
+      interior = 20 # 인테리어 요소 배치
+      tv_conv = 20 # TV 및 편의 요소 배치
+      people_conv = 20 # 편의 요소 대비 사람의 수
+      furniture = 20 # 가구 대비 사람의 수
+      df1 = pd.read_excel('per_1.xlsx', sheet_name=2)
+      df1 = df1.drop_duplicates(subset = ['persona_no'])
+      df1 = df1.reset_index()
+      df = pd.read_excel('per_1.xlsx', sheet_name=3)
+      data  = pd.concat([df1,df],axis = 1)
+      score = []
+      for i in range(data.shape[0]):
+         td = data.iloc[i,:]
+         IE = td['내향/외향']
+         SN = td['감각/직관']
+         JP = td['판단/인식']
+         Trend = td['트렌드\n민감도']
+         Quality = td['상품/서비스품질']
+         Easy = td['이용편의성'].iloc[:,0]
+         Age = int(td['age_gender'][:2])
+         area_score = area_f(SN, JP, area)
+         interior_score = interior_f(Trend, Easy, interior)
+         tv_conv_score = tv_conv_f(Easy, tv_conv)
+         people_conv_score = people_conv_f(IE, Easy, people_conv)
+         furniture_score = furniture_f(IE, Age, furniture)
+         total_score = area_score + interior_score + tv_conv_score + people_conv_score + furniture_score
+         score.appned(total_score)
+      per = np.argmax(np.array(score))
+      persona =data['persona_no'][per]
+      return persona
 
 if __name__ == '__main__':
    app.run('0.0.0.0', port=5001, debug=True,threaded=False)
