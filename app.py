@@ -140,11 +140,11 @@ def mapping(r,tp) :
       df1 = df1.drop_duplicates(subset = ['persona_no'])
       df1 = df1.reset_index()
       df = pd.read_excel('sheet1.xlsx')
-      df = df.rename(columns=df.iloc[0])
+      df = df.rename(columns=df.iloc[0]).iloc[1:,:]
       data  = pd.concat([df1,df],axis = 1)
       score = []
       personas = dict()
-      for i in range(1,data.shape[0]):
+      for i in range(data.shape[0]):
          td = data.iloc[i,:]
          IE = float(td['내향/외향'])
          SN = float(td['감각/직관'])
