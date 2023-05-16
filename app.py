@@ -57,7 +57,7 @@ def create():
          params = request.get_json()
          img_id = params["pInfo"][0]["imgUrl"]
          #os.system("curl " + img_url + " > test.jpg")
-         if a['pInfo'][0]['img_info'] == 'F':
+         if params['pInfo'][0]['img_info'] == 'F':
              pass
          else:
              opt = parse_opt(img_id)
