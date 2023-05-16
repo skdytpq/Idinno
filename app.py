@@ -57,10 +57,13 @@ def create():
          params = request.get_json()
          img_id = params["pInfo"][0]["imgUrl"]
          #os.system("curl " + img_url + " > test.jpg")
-         opt = parse_opt(img_id)
-         r = main1(opt)
-         val = mapping(r)
-         return f'{",".join(val)}'
+         if a['pInfo'][0]['img_info'] == 'F':
+             pass
+         else:
+             opt = parse_opt(img_id)
+             r = main1(opt)
+             val = mapping(r)
+             return f'{",".join(val)}'
       except:
          return 'NaN'
 
