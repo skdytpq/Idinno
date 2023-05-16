@@ -150,7 +150,7 @@ def mapping(r,tp) :
          IE = td['내향/외향']
          SN = td['감각/직관']
          JP = td['판단/인식']
-         Trend = td['트렌드\n민감도']
+         Trend = td['트랜드\n민감도']
          Quality = td['상품/서비스품질']
          Easy = td['이용편의성'].iloc[:,1]
          Age = int(td['age_gender'][:2])
