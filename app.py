@@ -141,6 +141,7 @@ def mapping(r,tp) :
       df1 = df1.drop_duplicates(subset = ['persona_no'])
       df1 = df1.reset_index()
       df = pd.read_excel('sheet1.xlsx')
+      df = df.rename(columns=df.iloc[0])
       data  = pd.concat([df1,df],axis = 1)
       score = []
       personas = dict()
