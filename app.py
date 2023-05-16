@@ -144,9 +144,8 @@ def mapping(r,tp) :
       data  = pd.concat([df1,df],axis = 1)
       score = []
       personas = dict()
-      for i in range(data.shape[0]):
+      for i in range(1,data.shape[0]):
          td = data.iloc[i,:]
-         print(td['내향/외향'])
          IE = float(td['내향/외향'])
          SN = float(td['감각/직관'])
          JP = float(td['판단/인식'])
