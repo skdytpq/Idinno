@@ -8,7 +8,7 @@ import pandas as pd
 from person import area_f ,interior_f,tv_conv_f,people_conv_f,furniture_f
 import numpy as np
 app = Flask(__name__)
-
+import pbd
 
 def parse_opt(img_id,type):
     parser = argparse.ArgumentParser()
@@ -147,13 +147,14 @@ def mapping(r,tp) :
       personas = dict()
       for i in range(data.shape[0]):
          td = data.iloc[i,:]
-         IE = int(td['내향/외향'])
-         SN = int(td['감각/직관'])
-         JP = int(td['판단/인식'])
-         Trend = int(td['트랜드\n민감도'])
-         Quality = int(td['상품/서비스품질'])
-         Easy = int(td['이용편의성'][1])
-         Age = int(td['age_gender'][:2])
+         pdb.set_trace()
+         IE = float(td['내향/외향'])
+         SN = float(td['감각/직관'])
+         JP = float(td['판단/인식'])
+         Trend = float(td['트랜드\n민감도'])
+         Quality = float(td['상품/서비스품질'])
+         Easy = float(td['이용편의성'][1])
+         Age = float(td['age_gender'][:2])
          area_score = area_f(SN, JP, area)
          interior_score = interior_f(Trend, Easy, interior)
          tv_conv_score = tv_conv_f(Easy, tv_conv)
