@@ -160,7 +160,7 @@ def mapping(r,tp) :
          furniture_score = furniture_f(IE, Age, furniture)
          total_score = area_score + interior_score + tv_conv_score + people_conv_score + furniture_score
          score.append(total_score)
-        
+      print(score,'!!!!!!!!!!!!!!!!!!!!!')
       a = np.argmax(np.array(score))
       personas[td['persona_no']] = total_score
       res = data.iloc[a,:]['persona_no']
