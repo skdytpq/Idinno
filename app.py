@@ -116,14 +116,12 @@ def mapping(r,tp) :
          val = pd.Series(key_list).value_counts().index[0:-1]
       return val
    else :
-      n = {'person' : 0 , 'elec' : 0 , 'home' : 0 ,'fur' : 0 ,'mot' : 0 , 'inter' : 0 , 'dish' : 0 ,'etc' : 0}
+      n = {'person' : 0 , 'elec' : 0 , 'fur' : 0 ,'mot' : 0 , 'inter' : 0 , 'dish' : 0 ,'etc' : 0}
       for i in r:
          if i in person:
             n['person'] +=1
          elif i in elec:
             n['elec'] +=1
-         elif i in home:
-            n['home'] +=1
          elif i in fur:
             n['fur'] +=1
          elif i in mot:
@@ -134,8 +132,8 @@ def mapping(r,tp) :
             n['dish'] +=1
          else:
             n['etc'] +=1
-      area = n['fur'] # 면적 당 가구 배치
-      interior =  n['home'] # 인테리어 요소 배치
+      area = (n['fur']  + n['mot'] + n['inter'] + n['dish'] + n['etc'])/5 # 면적 당 가구 배치
+      interior =  n['inter'] # 인테리어 요소 배치
       tv_conv = n['elec'] # TV 및 편의 요소 배치
       people_conv = n['person'] # 편의 요소 대비 사람의 수
       furniture = n['fur'] # 가구 대비 사람의 수
