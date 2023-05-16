@@ -133,10 +133,10 @@ def mapping(r,tp) :
          else:
             n['etc'] +=1
       area = (n['fur']  + n['mot'] + n['inter'] + n['dish'] + n['etc'])/5 # 면적 당 가구 배치
-      interior =  n['inter'] # 인테리어 요소 배치
-      tv_conv = n['elec'] # TV 및 편의 요소 배치
-      people_conv = n['person'] # 편의 요소 대비 사람의 수
-      furniture = n['fur'] # 가구 대비 사람의 수
+      interior =  int(n['inter']) # 인테리어 요소 배치
+      tv_conv = int(n['elec']) # TV 및 편의 요소 배치
+      people_conv = int(n['person']) # 편의 요소 대비 사람의 수
+      furniture = int(n['fur']) # 가구 대비 사람의 수
       df1 = pd.read_excel('sheet2.xlsx')
       df1 = df1.drop_duplicates(subset = ['persona_no'])
       df1 = df1.reset_index()
