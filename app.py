@@ -147,12 +147,12 @@ def mapping(r,tp) :
       personas = dict()
       for i in range(data.shape[0]):
          td = data.iloc[i,:]
-         IE = td['내향/외향']
-         SN = td['감각/직관']
-         JP = td['판단/인식']
-         Trend = td['트랜드\n민감도']
-         Quality = td['상품/서비스품질']
-         Easy = td['이용편의성'][1]
+         IE = int(td['내향/외향'])
+         SN = int(td['감각/직관'])
+         JP = int(td['판단/인식'])
+         Trend = int(td['트랜드\n민감도'])
+         Quality = int(td['상품/서비스품질'])
+         Easy = int(td['이용편의성'][1])
          Age = int(td['age_gender'][:2])
          area_score = area_f(SN, JP, area)
          interior_score = interior_f(Trend, Easy, interior)
