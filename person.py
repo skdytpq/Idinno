@@ -1,19 +1,4 @@
 
-ID = 12 # Image ID
-area = 20 # 면적 당 가구 배치
-interior = 20 # 인테리어 요소 배치
-tv_conv = 20 # TV 및 편의 요소 배치
-people_conv = 20 # 편의 요소 대비 사람의 수
-furniture = 20 # 가구 대비 사람의 수
-
-
-IE = float(input('내향/외향 점수 : '))
-SN = float(input('감각/직관 점수 : '))
-JP = float(input('판단/인식 점수 : '))
-Trend = float(input('트렌드민감도 점수 : '))
-Quality = float(input('상품/서비스 품질 : '))
-Easy = float(input('이용편의성 : '))
-Age = int(input('나이대 : '))
 
 
 
@@ -60,12 +45,3 @@ def furniture_f(x, y ,z): # x = IE, y = Age, z = furniture
     y_score = 40-y+z
     result = x_score + y_score
     return result
-
-area_score = area_f(SN, JP, area)
-interior_score = interior_f(Trend, Easy, interior)
-tv_conv_score = tv_conv_f(Easy, tv_conv)
-people_conv_score = people_conv_f(IE, Easy, people_conv)
-furniture_score = furniture_f(IE, Age, furniture)
-
-total_score = area_score + interior_score + tv_conv_score + people_conv_score + furniture_score
-total_score /= 5

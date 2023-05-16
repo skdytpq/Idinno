@@ -8,6 +8,23 @@ import pandas as pd
 from person import area_f ,interior_f,tv_conv_f,people_conv_f,furniture_f
 import numpy as np
 app = Flask(__name__)
+person = ['person']
+
+elec = ['cell phone', 'laptop', 'mouse', 'remote', 'keyboard',  'hair drier', 'toothbrush']
+
+home = ['tv', 'microwave', 'oven', 'toaster', 'refrigerator', 'sink']
+
+fur = ['chair', 'couch', 'bed', 'dining table', 'toilet']
+
+mot = ['bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat']
+
+inter = ['frisbee', 'kite', 'skis', 'snowboard', 'surfboard', 'tennis racket', 'potted plant', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'baseball bat', 'baseball glove', 'skateboard','sports ball', 'clock', 'vase', 'scissors', 'teddy bear', 'book']
+
+dish = ['bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl']
+
+etc = ['fire hydrant', 'stop sign', 'traffic light', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake']
+
+
 
 def parse_opt(img_id,type):
     parser = argparse.ArgumentParser()
@@ -66,7 +83,7 @@ def create():
              opt = parse_opt(img_id,'H')
              r = main1(opt)
              val = mapping(r,'H')
-             return val
+             return f'{",".join(val)}'
          else:
              opt = parse_opt(img_id,'F')
              r = main1(opt)
@@ -100,17 +117,36 @@ def mapping(r,tp) :
          val = pd.Series(key_list).value_counts().index[0:-1]
       return val
    else :
-      area = 20 # 면적 당 가구 배치
-      interior = 20 # 인테리어 요소 배치
-      tv_conv = 20 # TV 및 편의 요소 배치
-      people_conv = 20 # 편의 요소 대비 사람의 수
-      furniture = 20 # 가구 대비 사람의 수
+      n = {'person' : 0 , 'elec' : 0 , 'home' : 0 ,'fur' : 0 ,'mot' : 0 , 'inter' : 0 , 'dish' : 0 ,'etc' : 0}
+      for i in r:
+         if i in person:
+            n['person'] +=1
+         elif i in elec:
+            n['elec'] +=1
+         elif i in home:
+            n['home'] +=1
+         elif i in fur:
+            n['fur'] +=1
+         elif i in mot:
+            n['mot'] +=1
+         elif i in inter:
+            n['inter'] +=1
+         elif i in dish:
+            n['dish'] +=1
+         else:
+            n['etc'] +=1
+      area = n['fur'] # 면적 당 가구 배치
+      interior =  n['home'] # 인테리어 요소 배치
+      tv_conv = n['elec'] # TV 및 편의 요소 배치
+      people_conv = n['person'] # 편의 요소 대비 사람의 수
+      furniture = n['fur'] # 가구 대비 사람의 수
       df1 = pd.read_excel('per_1.xlsx', sheet_name=2)
       df1 = df1.drop_duplicates(subset = ['persona_no'])
       df1 = df1.reset_index()
       df = pd.read_excel('per_1.xlsx', sheet_name=3)
       data  = pd.concat([df1,df],axis = 1)
       score = []
+      personas = dict()
       for i in range(data.shape[0]):
          td = data.iloc[i,:]
          IE = td['내향/외향']
@@ -126,9 +162,12 @@ def mapping(r,tp) :
          people_conv_score = people_conv_f(IE, Easy, people_conv)
          furniture_score = furniture_f(IE, Age, furniture)
          total_score = area_score + interior_score + tv_conv_score + people_conv_score + furniture_score
-         score.appned(total_score)
-      per = np.argmax(np.array(score))
-      persona =data['persona_no'][per]
+         personas[td['persona_no']] = total_score
+      persona = pd.DataFrame(personas)
+      persona = persona.rename(columns = {0 : 'score'})
+      persona = persona.sort_values(ascending = False,by = 'score').iloc[:3].index
+      #per = np.argmax(np.array(score))
+      #persona =data['persona_no'][per]
       return persona
 
 if __name__ == '__main__':
