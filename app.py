@@ -66,7 +66,7 @@ def create():
              opt = parse_opt(img_id,'H')
              r = main1(opt)
              val = mapping(r,'H')
-             return f'{",".join(val)}'
+             return val
          else:
              opt = parse_opt(img_id,'F')
              r = main1(opt)
