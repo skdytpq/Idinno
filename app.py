@@ -144,7 +144,7 @@ def mapping(r,tp) :
       data  = pd.concat([df1,df],axis = 1)
       score = []
       personas = dict()
-      for i in range(data.shape[0]):
+      for i in range(data.shape[0]-1):
          td = data.iloc[i,:]
          IE = float(td['내향/외향'])
          SN = float(td['감각/직관'])
@@ -152,7 +152,6 @@ def mapping(r,tp) :
          Trend = float(td['트랜드\n민감도'])
          Quality = float(td['상품/서비스품질'])
          Easy = float(td['이용편의성'][1])
-         print(td['age_gender'],'!!!!!!!!!!!!!!!!')
          Age = float(td['age_gender'][:2])
          area_score = area_f(SN, JP, area)
          interior_score = interior_f(Trend, Easy, interior)
