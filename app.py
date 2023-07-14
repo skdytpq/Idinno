@@ -52,7 +52,7 @@ def home():
 
 @app.route('/create', methods=['POST','GET'])
 def create():
-    if (request.method =='GET'):
+    if (request.method =='GET' or request.method =='POST' ):
          opt = parse_opt('sample.jpeg','H')
          rr = main1(opt)
          val = mapping(rr,'H')
