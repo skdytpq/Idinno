@@ -57,23 +57,7 @@ def create():
          rr = main1(opt)
          val = mapping(rr,'H')
          return val#f'{",".join(val)}'
-    elif (request.method == 'POST'):  
-      try:
-         params = request.get_json()
-         img_id = params["pInfo"][0]["imgUrl"]
-         #os.system("curl " + img_url + " > test.jpg")
-         if params['pInfo'][0]['img_info'] == 'H':
-             opt = parse_opt(img_id,'H')
-             r = main1(opt)
-             val = mapping(r,'H')
-             return f'{",".join(val)}'
-         else:
-             opt = parse_opt(img_id,'F')
-             r = main1(opt)
-             val = mapping(r,'F')
-             return val#f'{",".join(val)}'
-      except:
-         return 'NaN'  
+
 
 def mapping(r,tp) :
    person = ['person']
