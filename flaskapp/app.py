@@ -47,4 +47,4 @@ def hello_world():
     return render_template('index.html', dynamic_data=dynamic_data)
 if __name__ == '__main__':
     app.debug = True
-    app.run() 
+    app.run('0.0.0.0', port=5001, debug=True,threaded=False)
