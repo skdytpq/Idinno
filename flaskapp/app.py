@@ -39,7 +39,7 @@ def index():
         response = dynamic_data
     # index.html 파일을 렌더링할 때 데이터를 함께 넘겨줍니다.
         return render_template('index.html', dynamic_data=dynamic_data)
-@app.route("/")
+@app.route("/gpt_ex")
 def hello_world():
     prompt = '성격유형과 일반적인 소비 성향은 "할인 혜택 알림 서비스를 이용하며, 서비스를 이용할 때 불편함이 없기를 원합니다." 이고 1개월 소비 지출 패턴은 "한달간 평균 지출하는 비용은 1,322,526원으로서 비슷한 연령에 비하여 15% 많은 수준입니다." 이고 최종적인 소비에 영향을 주는 요인은 "본인 스스로에게는 브랜드 파워요인이 가장 중요하고, 동일한 연령과 성별의 소비자 유형과 비교해 보면   브랜드 파워에 가장 민감한 편입니다." 인 30대 여성 고객이 있어. 이 고객의 온라인 교육 관련 상품에 대한 사용자 시나리오를 ""안에 들어간 키워드를 기반으로 만들어줘'
     response = get_completion(prompt)
