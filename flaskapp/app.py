@@ -45,6 +45,10 @@ def hello_world():
     response = get_completion(prompt)
     dynamic_data = response
     return render_template('index.html', dynamic_data=dynamic_data)
+
+@app.route("/")
+def hello():
+    return 'idinno'
 if __name__ == '__main__':
     app.debug = True
     app.run('0.0.0.0', port=5001, debug=True,threaded=False)
