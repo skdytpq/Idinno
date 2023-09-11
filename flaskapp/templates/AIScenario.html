@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소비자 유형 분석 서비스</title>
+
+    <link rel="icon" href="https://www.iknowyou.kr/resources/iknowyou/image/eye_logo.ico">    
+    <link rel="stylesheet" href="https://www.iknowyou.kr/resources/iknowyou/css/aiscenario.css">
+    <!-- <link rel="stylesheet" href="../css/aiscenario.css"> -->
+    <link rel="stylesheet" href="https://www.iknowyou.kr/resources/iknowyou/css/aiscenario_mobile.css" media="(min-width:0px) and (max-width:1000px)"> 
+</head>
+<body>
+    <main class="popup-content" >
+   		<div>
+  			<div class="middle_catagori">        	
+	        	<div class="middle_cli shadow">
+	            	<li id="s1" class="item-nav" >
+	            		AI기반의 소비예측 시나리오
+                    </li>	                             		
+				</div>
+                <div class="ai_produce">                    
+                    <h1>시나리오 생성 조건</h1>
+                    <p id="gtpPrompt" class="ai_txt" >
+                        선택된 상품정보 오프라인 >  패션의류/잡화 >  남성패션 >  남성 신발 <br>
+                        선택된 고객정보 20대 남성 C type <br>
+                        예상 인구 비중 763,113명 (동일 연령/성별 인구수 2,484,532명) <br>
+                        일반 소비 성향 소비 적극성이 높고, 트렌드 민감도는 낮다 <br>
+                        예상 지출 수준 비슷한 연령에 비하여 20% 많은 <br>
+                        소비 결정 키워드 광고와 홍보 <br>     
+                    </p>                   
+                </div>
+
+               	<div class="bttns_1" id="mov">
+               		<button class="bttn btn2" id="scrollButton"></button>
+              	</div>
+                  
+                <div class="ai_result" id="targetSection">
+                   <h1>시나리오 생성 결과</h1>                   
+                   <script>
+                        const resultContainer = document.getElementById('result-container');
+                        const eventSource = new EventSource('/sse');
+                        eventSource.onmessage = function(event) {
+                            const resultData = event.data;
+                            resultContainer.innerHTML = resultData; // 결과를 특정 위치에 업데이트
+                        };
+                        eventSource.onerror = function(error) {
+                            console.error("SSE error:", error);
+                            eventSource.close();
+                        };
+                   </script>
+                   <p class="txt_small">ChatGPT may produce inaccurate information about people, places, or facts. ChatGPT May 24 Version</p>
+                    <div class="btn" style="justify-content: center;">
+<!--
+                        <div>
+                            <button class="btn_circle btn_copy"></button>
+                            <button class="btn_circle btn_like"></button>
+                            <button class="btn_circle btn_hate"></button>
+                        </div>
+-->
+                        <div>
+                            <button class="btn_close" onclick="window.close()">닫기</button>
+                        </div>
+                        <script>
+                            // 버튼 클릭 시 스크롤 이동
+                            function scrollToTarget() {
+                                var targetSection = document.getElementById('targetSection');
+                                var targetOffsetTop = targetSection.offsetTop;
+                    
+                                window.scrollTo({
+                                    top: targetOffsetTop,
+                                    behavior: 'smooth' // 부드러운 스크롤 적용
+                                });
+                            }
+                    
+                            // 버튼 클릭 이벤트 처리
+                            var scrollButton = document.getElementById('scrollButton');
+                            scrollButton.addEventListener('click', scrollToTarget);
+                        </script>
+                    </div>
+                </div>
+            </div>
+  		</div>
+
+
+    </main> 
+</body>
+</html>

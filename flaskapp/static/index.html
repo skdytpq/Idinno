@@ -7,7 +7,7 @@
 
     <link rel="icon" href="https://www.iknowyou.kr/resources/iknowyou/image/eye_logo.ico">    
     <link rel="stylesheet" href="https://www.iknowyou.kr/resources/iknowyou/css/aiscenario.css">
-    <!-- <link rel="stylesheet" href="../css/aiscenario.css"-->
+    <!-- <link rel="stylesheet" href="../css/aiscenario.css"> -->
     <link rel="stylesheet" href="https://www.iknowyou.kr/resources/iknowyou/css/aiscenario_mobile.css" media="(min-width:0px) and (max-width:1000px)"> 
 </head>
 <body>
@@ -53,24 +53,6 @@
                             <button class="btn_close" onclick="window.close()">닫기</button>
                         </div>
                         <script>
-                            const dynamicDataElement = document.getElementById('gtpScenario'); // 스트림 데이터를 표시할 엘리먼트
-
-                            // SSE 이벤트 스트림 연결
-                            const eventSource = new EventSource('/sse');
-
-                            // SSE 메시지 이벤트 핸들러
-                            eventSource.onmessage = function(event) {  const resultData = event.data;
-                                console.log("qmffkfmql")
-                                dynamicDataElement.innerText += resultData; // 데이터를 업데이트하여 표시  
-                                
-};                           
-                            // SSE 에러 핸들러
-                            eventSource.onerror = function(error) {
-                            console.error("SSE error:", error);
-                            console.error("Ready state:", eventSource.readyState);
-                            console.error("URL:", eventSource.url);
-                            eventSource.close();
-                        };
                             // 버튼 클릭 시 스크롤 이동
                             function scrollToTarget() {
                                 var targetSection = document.getElementById('targetSection');
@@ -85,7 +67,18 @@
                             // 버튼 클릭 이벤트 처리
                             var scrollButton = document.getElementById('scrollButton');
                             scrollButton.addEventListener('click', scrollToTarget);
+                            const eventSource = new EventSource('/sse');
+                            const dynamicDataElement = document.getElementById('gtpScenario');
 
+                            eventSource.onmessage = function(event) {
+                                const resultData = event.data;
+                                dynamicDataElement.innerText = resultData; // 데이터를 업데이트
+                            };
+
+                            eventSource.onerror = function(error) {
+                                console.error("SSE error:", error);
+                                eventSource.close();
+                            };
                         </script>
                     </div>
                 </div>

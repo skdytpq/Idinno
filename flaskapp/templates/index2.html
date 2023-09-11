@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE Example</title>
+</head>
+<body>
+    <div id="result-container">
+        <!-- 결과가 여기에 표시됩니다 -->
+    </div>
+
+    <script>
+        const resultContainer = document.getElementById('result-container');
+        const eventSource = new EventSource('/sse');
+
+        eventSource.onmessage = function(event) {
+            const resultData = event.data;
+            resultContainer.innerHTML = resultData; // 결과를 특정 위치에 업데이트
+        };
+
+        eventSource.onerror = function(error) {
+            console.error("SSE error:", error);
+            eventSource.close();
+        };
+    </script>
+</body>
+</html>
